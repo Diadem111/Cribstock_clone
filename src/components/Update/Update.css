@@ -1,0 +1,28 @@
+.ttr{
+    background-color:rgba(13,36,54,1);
+     color:#fff;
+     border-radius: 10px;
+     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.btn12{
+    background-color: transparent;
+    border: 1px solid gray;
+    color: #fff;
+    width: 150px;
+}
+.btn12 :hover{
+    /* background-color: #fff; */
+    color: #fff;
+    transition: 0.3s all ease;
+}
+
+@media screen and (max-width:768px)  {
+    .mycont{
+        margin-top:200px;
+    }
+}
+@media screen  and (max-width:1200px){
+    /* .mycont{
+        margin-top:1px;
+    } */
+}

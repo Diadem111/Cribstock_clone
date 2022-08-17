@@ -1,0 +1,104 @@
+/* .Cards {
+    display: flex;
+    gap: 10px;
+  } */
+  .parentContainer{
+    position: relative;
+    left:10px;
+    top: 10px;
+    width: 100%;
+    /* background-color: red; */
+    align-items: center;
+     justify-content: center;
+  
+  }
+  .ttt{
+      border-radius: 10px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .ttt button {
+    background-color: transparent;
+    border: 1px solid rgb(184, 178, 178);
+    font-size: 13px;
+
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .Cards{
+      flex-direction: column;
+    }
+    .parentContainer{
+      position: relative;
+      top:0px;
+      left: 0px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+  }
+  
+  @media screen and (max-width: 768px)
+  {
+    .Cards{
+      width: 90%;
+    }
+    .parentContainer{
+      position: relative;
+      top:0px;
+      left:0px;
+      align-items: center;
+      justify-content: center;
+  
+    }
+    
+  }
+  
+
+  /* table */
+  .MuiTableRow-root > * {
+    padding: 10px;
+  }
+  
+  .MuiTableRow-root.MuiTableRow-head > * {
+    font-weight: bold !important;
+  }
+  
+  .Table td,
+  th {
+    border: none !important;
+  }
+  
+  .Table:first-child {
+    border-radius: 0.7rem !important;
+  }
+  .status {
+    padding: 8px;
+    border-radius: 9px;
+  }
+  
+  .Details {
+    color: #00b5ff !important;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .Table {
+      width: 170%;
+      margin-top: 2rem;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .Table{
+      position:absolute;
+      top:40%;
+      left:50%;
+      transform: translate(-50%,50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 23rem;
+    }
+  }
