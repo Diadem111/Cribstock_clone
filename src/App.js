@@ -11,6 +11,9 @@ import Portfolio from "./components/Portfolio/Portfolio"
 // import DashboardM from "./components/DashboardM";
 import Main from "../src/components/MainDash/Main";
 import Wallet from "./components/Wallet/Wallet";
+import Investment from "./components/Investment/Investment";
+import Trade from "./components/Trade/Trade";
+// import Invest from "./components/Invest/Invest";
 
 
 function App() {
@@ -25,7 +28,9 @@ function App() {
       <Route path="/dashboard" element={<Main/>}/>
       <Route path="/users" element={<Portfolio/>}/>
       <Route path="/wallet" element={<Wallet/>}/>
-     
+      <Route path="/invest" element={<Investment/>}/>
+      <Route path="/trade" element={<Trade/>}/>
+
         </Routes> 
         {/* <div style={{overflowY:"scroll", height:"2200px"}}></div> */}
     </div>
