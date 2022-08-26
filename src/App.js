@@ -13,6 +13,8 @@ import Main from "../src/components/MainDash/Main";
 import Wallet from "./components/Wallet/Wallet";
 import Investment from "./components/Investment/Investment";
 import Trade from "./components/Trade/Trade";
+import Product from "./components/Trade/Product/Product";
+import ProductContent from "./components/Trade/Product/ProductContent/ProductContent";
 // import Invest from "./components/Invest/Invest";
 
 
@@ -30,6 +32,9 @@ function App() {
       <Route path="/wallet" element={<Wallet/>}/>
       <Route path="/invest" element={<Investment/>}/>
       <Route path="/trade" element={<Trade/>}/>
+      <Route path="/product" element={<Product/>}/>
+      <Route path="/saw" element={<ProductContent	/>}/>
+
 
         </Routes> 
         {/* <div style={{overflowY:"scroll", height:"2200px"}}></div> */}

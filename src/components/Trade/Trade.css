@@ -51,5 +51,61 @@
   box-sizing: border-box;
   /* align-items: center; */
   /* justify-content: center; */
-  background-color: red;
+  /* background-color: red; */
+}
+
+.ttto {
+    background-color: #fff;
+}
+.lee {
+  background-color: #fff;
+  text-decoration: none;
+}
+.card100 {
+    height: 120px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+
+}
+.img1 {
+  width:80px;
+  height:80px;
+  border-radius:10px;
+  float: left;
+  margin-right:20px;
+ 
+}
+.mybt {
+  margin-left:750px;
+  margin-top:30px;
+}
+
+@media screen and (max-width: 1200px) {
+   
+  .AppGlass5{
+    grid-template-columns: 10% 50% auto;
+    overflow-y: scroll;
+    height: 100%;
+  }
+  
+  
+  
+}
+
+@media screen and (max-width: 768px)
+{
+  
+  .list5 {
+    height: 150vh;
+  }
+  .AppGlass5{
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+  .mybt {
+    margin-left: 40px;
+    margin-top: 30px;
+  }
+  
+  
 }

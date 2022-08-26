@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,200&family=Fjalla+One&family=Lato:ital,wght@1,300&family=Oswald&family=Roboto+Slab&display=swap');
+:root {
+--primary-color : #9ccc3d;
+--secondary-color:rgba(3,3,27,0.7);
+--dark-background-color:rgb(2,2,15);
+--font:"fira" , sans-serif;
+--black: #242d49;
+--gray: #788097;
+--sidegray :#EDF2F7;
+--glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #c4d8cc54;
+
+}
+.App6 {
+    color: var(--black);
+  background: linear-gradient(
+    106.37deg,
+    #EDF2F7 29.63%,
+    #E2E8F0 51.55%,
+    #CBD5E0 90.85%
+   
+
+  );
+  height:100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+
+}
+.AppGlass6{
+    display: grid;
+    height: 97%;
+    width: 97%;
+    background: var(--glass);
+    border-radius: 2rem;
+    gap: 16px;
+    grid-template-columns: 11rem auto 0;
+    overflow: hidden;
+    /* background-color: blue; */
+    
+  
+}
+
+
+.list6{
+  height:78.5%;
+  overflow-y:scroll ;
+  /* overflow-y: scroll; */
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* width:100%; */
+  box-sizing: border-box;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* background-color: red; */
+}
+.ggt {
+    /* background-color: #9ccc3d; */
+    /* height:6200px; */
+    /* overflow: scroll; */
+    /* overflow-y: scroll; */
+}
+.aff {
+    /* border: 2px solid red; */
+    width: 60px;
+    font-weight: bold;
+    font-family: fira;
+    height: 40px;
+    border-radius:20px;
+    background-color: #9ccc3d;
+    /* color: #fff; */
+}
+.aff1 {
+    /* border: 2px solid red; */
+    width: 60px;
+    font-weight: bold;
+    font-family: fira;
+    height: 40px;
+    border-radius:20px;
+    background-color:transparent;
+    /* color: #fff; */
+}
+.aff2 {
+    margin-left: 700px;
+    /* border: 2px solid red; */
+    width: 200px;
+    font-weight: bold;
+    font-family: fira;
+    height: 50px;
+    border-radius:15px;
+    margin-top: 10px;
+    display: flex;
+    background-color: #000;
+    color: #fff;
+}
+.pp {
+    font-size: 20px;
+    font-family: fira;
+}
+.ddw {
+    width: 20px;
+    height: 20px;
+    background-color: #9ccc3d;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.ffd2 {
+    width: 100px;
+    height: 40px;
+    justify-items: center;
+    align-items: center;
+    background-color:transparent;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-family: fira;
+    font-weight: bold;
+    /* margin-left: 100px; */
+    /* margin-bottom: 10px; */
+    
+}
+.ffd2:hover {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 0px 10px 5px 2px;
+    /* background-color: rgb(228, 220, 220); */
+    /* background-image:linear-gradient(to bottom right,#3EC70B, rgb(30, 223, 30)); */
+  /* background-color: green; */
+  box-shadow: 0px 15px 20px blanchedalmond 0.4;
+    background-color: #9ccc3d;
+
+}
+.muy {
+    /* width: 290px; */
+    height: 190px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+
+}
+@media screen  and (max-width:1200px){
+    /* .mycont{
+        margin-top:1px;
+    } */
+    .AppGlass6{
+        grid-template-columns: 10% 50% auto;
+        overflow-y: scroll;
+        height: 100%;
+      }
+      
+     
+}
+@media screen and (max-width:768px)  {
+    .list6 {
+        height:320vh;
+        overflow-y:scroll ;
+        box-sizing: border-box;
+        
+        /* width:100%; */
+        /* height: 150vh; */
+      }
+      .AppGlass6{
+        grid-template-columns: 1fr;
+        height: 100%;
+      }
+      .aff2 {
+        margin-left:30px;
+        /* border: 2px solid red; */
+        width: 200px;
+        font-weight: bold;
+        font-family: fira;
+        height: 70px;
+        border-radius:15px;
+        margin-top: 10px;
+        display: flex;
+        background-color: #000;
+        color: #fff;
+    }
+    
+      
+}
