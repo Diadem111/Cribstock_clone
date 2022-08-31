@@ -16,6 +16,7 @@ import Trade from "./components/Trade/Trade";
 import Product from "./components/Trade/Product/Product";
 import ProductContent from "./components/Trade/Product/ProductContent/ProductContent";
 // import Invest from "./components/Invest/Invest";
+import Graph from "./components/Graph/Graph";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/trade" element={<Trade/>}/>
       <Route path="/product" element={<Product/>}/>
       <Route path="/saw" element={<ProductContent	/>}/>
+      <Route path="/graph" element={<Graph	/>}/>
 
 
         </Routes> 
