@@ -1,4 +1,12 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, useState} from 'react';
+import "./GraphSection.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import Carousel from 'react-bootstrap/Carousel';
+import { Carousel } from 'react-responsive-carousel';
+
+// import Carousel from 'better-react-carousel'
+// import Carousel from 'better-react-carousel'
+
 // import {ChartComponent , SeriesCollectionDirective , SeriesDirective , Inject , HiloSeries,Tooltip, DateTime , Zoom , Logarithmic , Crosshair } from "@syncfusion/ej2-react-charts";
 import { FinancialChartData, FinancialPrimaryXAxis, FinancialPrimaryYAxis } from "../../Data/Data";
 
@@ -13,11 +21,10 @@ import {
   Tooltip,
   Legend,
   Brush,
-  AreaChart,
-  Area,
   ResponsiveContainer,
 } from 'recharts';
 import {format, parseISO, subDays} from "date-fns";
+import { IoMdPricetags } from 'react-icons/io';
 // import {
 //   LineChart,
 //   Line,
@@ -80,90 +87,134 @@ const data = [
 
 for (let num = 30 ; num >=0; num--) {
   data.push({
-    date:subDays(),
-    value: 1 + Math.random()
+    date:subDays(new Date(), num).toISOString().substring(0,10),
+    price: 1 + Math.random()
   })
 }
 
-const date1 = new Date('2017, 1, 1');
 
-function filterValue(value) {
-  if (value.x >= date1) {
-    return value.x, value.high, value.low;
-  }
-}
-const returnValue = FinancialChartData.filter(filterValue);
 
 export default function GraphSection () {
-    return (
-        <>
 
-        <content className=" ms-3  parentContainer1">
+  const GramTool = () => {
+    const  CustomTooltip = ({active, payload , label} ) =>  {
+      console.log({label})
+      console.log("ggg")
+      // console.log(<p>{payload[0].value.toFixed(2)}</p>)
+       if (active) {
+       return ( 
+       <div className='tooltip'>
+                {/* <p >{label}</p> */}
+           <h4>{format(parseISO(label), "eeee, d MMM, yyyy")}</h4>
+             <p>{payload[0].value.toFixed(2)}</p>
+         </div>
+        
+       );
+         }
+       return null;
+     }
+   
+    return (
+      <>
+ <content className=" ms-3  parentContainer1">
       <div className=" bg-danger">
         <div>
           <h2 className='fw-bolder'>SHPNG</h2>
             <span className='d-flex flex-row'>
               <GoLocation/>
+              
               <p>22 monastery road, Sangotedo, Lagos, Nigeria
                 </p>
+               
             </span>
         </div>
       </div>
       <content className="bg-success mt-2 text-center dd11">
         <div className='dww'>
-        <ResponsiveContainer width="100%" height={200}>
-          <LineChart
-            width={500}
-            height={200}
+        <ResponsiveContainer width="100%" height={400}>
+          <AreaChart
             data={data}
-            // dataSource={returnValue}
-            syncId="anyId"
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" 
-   />
-            <YAxis       />
-            <Tooltip />
-            <Line type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
-            <Brush />
-          </LineChart>
-        </ResponsiveContainer>
+            margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
 
-        {/* <ChartComponent
-          id="charts"
-          primaryXAxis={FinancialPrimaryXAxis}
-          primaryYAxis={FinancialPrimaryYAxis}
-          chartArea={{ border: { width: 0 } }}
-          tooltip={{ enable: true, shared: true }}
-          crosshair={{ enable: true, lineType: 'Vertical', line: { width: 0 } }}
-         
-        >
-          <Inject services={[HiloSeries, Tooltip, DateTime, Logarithmic, Crosshair, Zoom]} />
-          <SeriesCollectionDirective>
-            <SeriesDirective
-              // dataSource={returnValue}
-              xName="x"
-              yName="low"
-              name="Apple Inc"
-              type="Hilo"
-              low="low"
-              high="high"
+            >
+              <defs>
+                <linearGradient id='color' x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0.0}/>
+
+                </linearGradient>
+              </defs>
+              <Area dataKey="price" type="monotone"
+            stroke="#8884d8"
+            fill="url(#colorValue)"/>
+
+              <XAxis  dataKey="date" axisLine={false} 
+              tickLine={false} 
+              tickFormatter={(string) => {
+                const date = parseISO(string);
+                if (date.getDate() % 1 === 0) {
+                  return format(date, "MMM , d");
+                }
+                return ""
+              }}
+              />
+
+            <YAxis dataKey="price" 
+          axisLine={false} 
+          tickLine={false} 
+          tickCount={8}
+            tickFormatter={number => `#${number.toFixed(2)}`}
             />
-          </SeriesCollectionDirective>
-        </ChartComponent> */}
-        </div>
+
+              <Tooltip      
+                     wrapperStyle={{ backgroundColor: "red" }}
+            labelStyle={{ color: "green" }}
+            itemStyle={{ color: "cyan" }}
+            formatter={function(price, name,label) {
+              return `${price}`;
+            }}
+            labelFormatter={function(price) {
+              return ` ${price}`;
+            }}
+              />
+
+              <CartesianGrid  opacity={0.1} strokeDashArray="3 3" vertical={false}/>
+          </AreaChart>
+        </ResponsiveContainer>
+          </div>
       </content>
 
     </content>
+      </>
+    )
+  }
+  
+  function NextPage  () {
+    const [index, setIndex] = useState(0);
 
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+    return (
+      <>
+      <div className='container q'>
+     
+      </div>
+      </>
+    )
+  }
+    return (
+        <>
+        <GramTool/>
+        <NextPage/>
         </>
+        
 
    
     )
+    
 }
+
+
+
+
