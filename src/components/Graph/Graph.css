@@ -1,12 +1,127 @@
-.MainDash5{
-  height:78.5%;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,200&family=Fjalla+One&family=Lato:ital,wght@1,300&family=Oswald&family=Roboto+Slab&display=swap');
+:root {
+--primary-color : #9ccc3d;
+--secondary-color:rgba(3,3,27,0.7);
+--dark-background-color:rgb(2,2,15);
+--font:"fira" , sans-serif;
+--black: #242d49;
+--gray: #788097;
+--sidegray :#EDF2F7;
+--glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #c4d8cc54;
+
+}
+.App7{
+    color: var(--black);
+  background: linear-gradient(
+    106.37deg,
+    #EDF2F7 29.63%,
+    #E2E8F0 51.55%,
+    #CBD5E0 90.85%
+   
+
+  );
+  height:200vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+
+}
+.AppGlass7{
+    display: grid;
+    height: 100%;
+    width: 97%;
+    background: var(--glass);
+    border-radius: 2rem;
+    gap: 16px;
+    grid-template-columns: 11rem 55rem 22rem;
+    overflow: hidden;
+    /* background-color: blue; */
+    
+  
+}
+
+/* .sw {
+  position: fixed;
+  top:500px;
+  right:30px;
+  z-index:5;
+  background-color: red;
+} */
+.fee {
+  /* background-color: red; */
+  position:fixed;
+  top:500px;
+  right:30px;
+  z-index:5;
+}
+.wow{
+  max-height:120%;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  box-sizing: border-box;
+  margin-left: 30px;
     /* padding-top: 1rem; */
     display: flex;
-    overflow-y: scroll;
     flex-direction: column;
     justify-content: space-evenly;
-    border: 2px solid blue;
-     margin-top: 10px;
+    /* border: 2px solid blue; */
+     /* margin-top: 50px; */
+     /* align-items: center; */
+     /* justify-content: center; */
+  }
+  .re {
+    background-color: #9ccc3d;
+    height:78%;
+    overflow: scroll;
+    overflow-y: scroll;
+
   }
   
+  @media screen and (max-width: 1200px) {
+    .wow{
+        justify-content:flex-start;
+        margin-top: 2rem;
+    }
+    
+  }
   
+  @media screen and (max-width: 768px)
+  {
+    .wow{
+        align-items: center;
+        margin-left:0px;
+ 
+    }
+    .App7 {
+      /* height: 180vh; */
+    }
+    
+  }
+  
+  @media screen and (max-width: 1200px) {
+      .AppGlass7{
+        grid-template-columns: 10% 50% auto;
+        overflow-y: scroll;
+        height: 100%;
+      } 
+    }
+    
+    @media screen and (max-width: 768px) {
+      .AppGlass7{
+          grid-template-columns: 1fr;
+          height: 100%;
+      
+        
+        } 
+        .wow {
+          border: 3px solid red;
+        height:200vh;
+        overflow-y:scroll ;
+        box-sizing: border-box;
+        
+        }  
+    }

@@ -1,22 +1,31 @@
 .parentContainer1{
-    position: relative;
-    left:10px;
-    top:-210px;
-    width:90%;
-    /* background-color: red; */
-    align-items: center;
-     justify-content: center;
-  
+  position: relative;
+  left:10px;
+  /* top: 10px; */
+  width: 100%;
+  /* background-color: red; */
+  align-items: center;
+   justify-content: center;
+
   }
+  .area1{
+    width:700px;
+     height:500px;
+     /* background-color: blue; */
+   }
   .dd11 {
-    width: 400px;
+    /* width: 400px; */
     height: 200px;
     border-radius: 3px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+  }
+  .ww {
+    /* margin-top: -10px; */
   }
   .dww {
+
     height: 200px;
-    margin-top:0px;
+    /* margin-top:0px; */
   }
   .tooltip {
     border-radius: 0.35rem;
@@ -27,9 +36,95 @@
     /* text-align: center; */
   }
   .q {
-    border: 2px solid yellow;
+    width: 650px;
+    margin-top: 140px;
+    /* border: 2px solid yellow; */
+   /* background-color: #000;  */
   }
   .cen {
     width: 170px;
     height: 150px;
+  }
+  .gr {
+    width: 154px;
+    height: 100px;
+  }
+  ul {
+    list-style-type: circle;
+    
+  }
+  .container33  {
+    /* display: none; */
+     }
+
+.test {
+  position: relative;
+  z-index: 0;
+}
+
+
+
+.targeting-box {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: blueviolet;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.popup-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display:none;
+}
+.popup-img button {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+}
+.popup-img   img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #fff;
+  border-radius: 5px;
+  width: 750px;
+  object-fit:cover;
+}
+
+  @media screen and (max-width: 768px) {
+   .area1 {
+    /* position:; */
+    left:10px;
+    width:350px;
+     height:300px;
+   }
+   .q {
+    position:absolute;
+    width: 345px;
+    margin-top: 20px;
+    border: 2px solid yellow;
+   /* background-color: #000;  */
+  }
+  .gr {
+    width:105px;
+    height: 100px;
+  }
+  .popup-img   img {
+
+    width:95%;
+     }
+  
+
   }

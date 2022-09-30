@@ -261,10 +261,10 @@ box-sizing: border-box;
     /* height:25rem; */
     border-radius: 15px;
     background: #fff;
-    box-shadow: -5px -5px 10px;
+    box-shadow: 2px 2px 2px;
   }
   .pty{
-   width: 10px;
+   width: 100px;
     /* position: absolute; */
     margin-left:20px;
     /* background-color: red; */
@@ -503,7 +503,7 @@ box-sizing: border-box;
   }
   .money2{
     position: relative;
-    left: -8px;
+    /* left: -8px; */
     /* border: 2px solid blue; */
     /* clip-path: polygon(0 0, 100% 0%, 99% 90%, 0% 100%); */
     background-color:#EDF2F7;
@@ -511,7 +511,7 @@ box-sizing: border-box;
     display: flex;
     margin-top: 30px;
     flex-direction: row;
-    box-shadow:0px 4px 4px 10px grey;
+    /* box-shadow:0px 4px 4px 10px grey; */
   }
   
   .old1{
@@ -552,7 +552,7 @@ height: 150px;
 border: 2px solid greenyellow;
 border-radius: 15px;
 background:transparent;
-box-shadow: -10px -5px 15px;
+box-shadow: 2px 2px 2px;
 border-style: dotted;
   }
  

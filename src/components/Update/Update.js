@@ -10,7 +10,7 @@ export default function Update() {
         <div className='card ttr'>
             <div className='card-body'>
                 <div className='mx-auto text-center justify-content-center'>
-                <FontAwesomeIcon icon={faUserGroup} color="white" className=''  size='6x'/> 
+                <FontAwesomeIcon icon={faUserGroup} color="white" className=' '  size='6x'/> 
                 </div>
                  <div className='card-text mx-auto mt-4'>
                  <h5 className='text-center'>Claim Your #500 Gift</h5>

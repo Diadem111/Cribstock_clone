@@ -142,7 +142,7 @@ body{
        align-items: center;
        /* font-size:30px; */
        justify-content: center;
-       font-family:oswald;
+       /* font-family:oswald; */
        /* top:40px; */
    }
    
@@ -150,11 +150,11 @@ body{
   
   .k1 h1{
     font-size:20px;
-    font-family:oswald;
+    /* font-family:oswald; */
   }
   .k1 h2{
     font-size: 16px;
-    font-family:oswald;
+    /* font-family:oswald; */
     line-height:normal;
     word-spacing: 1px;
     color:#fff;
@@ -190,7 +190,7 @@ body{
     position: relative;
     left:70px;
     top:-80px;
-    font-family:oswald;
+    /* font-family:oswald; */
     word-spacing: 1px;
     height: 150px;
     

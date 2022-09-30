@@ -15,6 +15,13 @@ import {AiOutlineBars} from "react-icons/ai";
 // import { SidebarData } from ".../Data/Data";
 // import {IoIosNotificationsOutline} from "react-icons/io";
 import { motion } from "framer-motion";
+import Portfolio from "../Portfolio/Portfolio";
+import Wallet from "../Wallet/Wallet";
+import Main from "../MainDash/Main";
+import Invest from "../Investment/Investment";
+import Trade from "../Trade/Trade";
+import { useNavigate } from "react-router-dom";
+
 
 
 const SidebarContainer = styled.div`
@@ -164,7 +171,7 @@ export default function Sidebar() {
     <div className="menu">
     <SidebarContainer>
                 <SidebarMenu>
-                     <Link to="/" className='Link1 active-link'>
+                     <Link to="/dashboard"  className='Link1 active-link' >
                      <SidebarMenuItem>
                         <Icon>
                         <RiDashboardLine/>
@@ -172,7 +179,7 @@ export default function Sidebar() {
                          <SidebarMenuItemLabel  >Overview</SidebarMenuItemLabel>
                     </SidebarMenuItem>
                      </Link>
-                       <Link to="/" className='Link1'>
+                       <Link to="/dashboard/portfolio" className='Link1'>
                        <SidebarMenuItem>
                       <Icon>
                       <BsFillBriefcaseFill/>
@@ -180,7 +187,7 @@ export default function Sidebar() {
                      <SidebarMenuItemLabel>Portfolio</SidebarMenuItemLabel>
                     </SidebarMenuItem>
                        </Link>
-                       <Link to="/" className='Link1'>
+                       <Link to="/dashboard/wallet" className='Link1'>
                        <SidebarMenuItem>
                          <Icon>
                          <BsWallet/>
@@ -188,7 +195,7 @@ export default function Sidebar() {
                               <SidebarMenuItemLabel>Wallet</SidebarMenuItemLabel>
                     </SidebarMenuItem>
                        </Link>
-                        <Link to="/" className='Link1'>
+                        <Link to="/dashboard/invest" className='Link1'>
                         <SidebarMenuItem>
                         <Icon>
                         <BsGraphUp/>
@@ -196,7 +203,7 @@ export default function Sidebar() {
                          <SidebarMenuItemLabel>Invest</SidebarMenuItemLabel>
                     </SidebarMenuItem>
                         </Link>
-                       <Link to="/" className='Link1'>
+                       <Link to="/dashboard/trade" className='Link1'>
                        <SidebarMenuItem>
                          <Icon>
                          <BsPeople/>

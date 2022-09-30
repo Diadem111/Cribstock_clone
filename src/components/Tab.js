@@ -54,7 +54,7 @@ export default function Tab() {
                 <div className="pty"> <img src="/p2.png" alt="" /></div>
             </div>
             <div className="card-body "> 
-               <div  className="ht">  <h4>Create free account</h4></div>
+               <div  className="ht  card-title">  <h4>Create free account</h4></div>
              <main className="main">
              <p className="listMe">
             Create an account for free,
@@ -82,9 +82,9 @@ export default function Tab() {
                 <div className="pty "> <img src="/p3.png" alt="" /></div>
             </div>
             <div className="card-body "> 
-               <div  className="ht">  <h4>Create free account</h4></div>
+               <div  className="ht card-title">  <h4>Create free account</h4></div>
                 <main className="main">
-                <p className="listMe">
+                <p className="listMe  ">
             Create an account for free,
              and you'll get a free wallet and a free bank account to fund it.
             </p>
@@ -124,7 +124,7 @@ export default function Tab() {
                   </main>
                 </section>
                    {/* End */}
-                   <section className="container-fluid money2 mt-5">
+                   <section className="container money2 mt-5">
                                 <main className="old1 ">
                     <h5 className="mt-5 pt-5 pb-3">Start building wealth in 5 minutes</h5>
                     <content className="container">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import {AiOutlineArrowLeft} from "react-icons/ai";
 import {AiOutlinePlus} from "react-icons/ai";
@@ -14,6 +14,8 @@ import { Container } from "@mui/system";
 
 
 export default function Product () {
+    const [show, setShow] = useState(false);
+    const [known, setKnown] = useState(false);
     return (
         <>
         <section className="App6">
