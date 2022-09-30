@@ -72,7 +72,9 @@
     .RightSide {
       display: none;      
     }
-    
+    .RightSide1{
+        display: none;
+    }
 }
 @media screen  and (max-width:1200px){
     /* .mycont{

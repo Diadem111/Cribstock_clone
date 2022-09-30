@@ -3,12 +3,13 @@ import "./GraphSection.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-
+import {useHistory,useLocation} from "react-router";
 import LeftArrow from "../../../src/assets/arrow-left.svg";
 import RightArrow from "../../../src/assets/arrow-right-short.svg";
 import {AiOutlineArrowLeft} from "react-icons/ai";
 import {AiOutlineArrowRight} from "react-icons/ai";
 import { Link, useParams } from 'react-router-dom';
+import ReactDOM from "react-dom";
 
 
 // import {ChartComponent , SeriesCollectionDirective , SeriesDirective , Inject , HiloSeries,Tooltip, DateTime , Zoom , Logarithmic , Crosshair } from "@syncfusion/ej2-react-charts";
@@ -105,16 +106,31 @@ for (let num = 30 ; num >=0; num--) {
 
 export default function GraphSection () {
   const [showOverlay, setShowOverlay] = useState(false);
-  const url = "http://localhost:4000/user/getdoc/";
+const [product,setProduct] = useState({});
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+  const url = `http://localhost:4000/user/find/`+id;
 
    const params = useParams();
    useEffect(() => {
-   
-     
-   }, []);
-       async  function getData() {
-       }
-   
+     const getProduct = async () => {
+      try {
+        await axios.get(url).then((res)=>{
+          // console.log(res.data);
+          if(res.data){
+            let myArray = res.data;
+            // console.log(myArray);
+             setProduct(res.data);
+             console.log(product);
+          }
+        })
+          }catch (error) {
+            console.log(error);
+          }
+     }
+       getProduct();
+   }, [id]);
+       
 
 
   const GramTool = () => {
@@ -140,12 +156,11 @@ export default function GraphSection () {
  <content className=" ">
       <div className=" ms-lg-5 ms-0 ps-0 mt-lg-5 pt-lg-5 mt-3  ww ">
         <div>
-          <h2 className='fw-bolder mt-5 ms-lg-0 ms-3 ps-lg-0 ps-3'>SHPNG</h2>
+          <h2 className='fw-bolder mt-5 ms-lg-0 ms-3 ps-lg-0 ps-3'>{product.name}</h2>
             <span className='d-flex flex-row ms-lg-0 ms-3 ps-lg-0 ps-3'>
               <GoLocation className=''/>
               
-              <p className="ms-lg-0">22 monastery road, Sangotedo, Lagos, Nigeria
-                </p>
+              <p className="ms-lg-0">{product.location}    </p>
                
             </span>
         </div>
@@ -219,7 +234,9 @@ export default function GraphSection () {
     const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
       <img src="/left.png" alt="nextArrow" {...props} />
     );
+   
     const productSlideImg = [
+     
       {Img : "/house1.jpg" , ImgName : "img1"},
       {Img : "/house2.jpg" , ImgName : "img2"},
       {Img : "/house3.jpg" , ImgName : "img3"},
@@ -356,6 +373,14 @@ export default function GraphSection () {
      
   }
   const PriceSection = () => {
+    const NamesList = async () => (
+      <div>
+        <ul>
+      {/* {product.description.map(person => <li key={person} 
+        className="text-muted mt-2">{person}</li>)} */}
+        </ul>
+      </div>
+    )
     return (
             <>
             <section className="mt-lg-5 mt-5 pt-lg-0 pt-5 ms-2">
@@ -368,7 +393,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="fw-bolder">#10,868.88</p>
+                    <p className="fw-bolder">{product.price}</p>
                   </div>
                 </div>
                 {/* end of first */}
@@ -380,7 +405,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="fw-bolder">#70,868.88</p>
+                    <p className="fw-bolder">{product.market_price}</p>
                   </div>
                 </div>
                 {/* end */}
@@ -392,7 +417,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="text-success fw-bolder">1.05%</p>
+                    <p className="text-success fw-bolder">{product.days}%</p>
                   </div>
                 </div>
                 {/* end */}
@@ -404,7 +429,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="text-success fw-bolder">8.64%</p>
+                    <p className="text-success fw-bolder">{product.year}%</p>
                   </div>
                 </div>
                 {/* end */}
@@ -419,7 +444,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="fw-bolder">#0.00</p>
+                    <p className="fw-bolder">#{product.volume}</p>
                     <p>0</p>
                   </div>
                 </div>
@@ -432,7 +457,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="fw-bolder">4766</p>
+                    <p className="fw-bolder">{product.available_supply}</p>
                   </div>
                 </div>
                 {/* end */}
@@ -444,7 +469,7 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="text-success fw-bolder">7000</p>
+                    <p className="text-success fw-bolder">{product.Circulating_supply}</p>
                   </div>
                 </div>
                 {/* end */}
@@ -456,22 +481,41 @@ export default function GraphSection () {
                         <AiOutlineExclamationCircle className='ms-3 '/>
                       </p>
                     </span>
-                    <p className="text-danger fw-bolder">0</p>
+                    <p className="text-danger fw-bolder">{product.Average_volume}</p>
                   </div>
                 </div>
                 {/* end */}
                 <div className="row">
                   <h4 className="fw-bolder mt-3 ms-3">Location</h4>
                   <p className="text-muted ms-3">
-                  The project is located at unit 8 block A,
-                   plot 27/28 Iberekodo avenue, bridge gate estate, Agungi, Lekki, Lagos
+                  {product.location}
                   </p>
                 </div>
                 {/* end */}
                 <section>
                   <h4 className="fw-bolder ms-3 mt-2">Description</h4>
-                  <ul className="mt-4">
-                    <li className='text-muted'>Interior/furnishing in progress and should be ready by 20th August</li>
+                    <div className=''>
+                    {/* <NamesList/> */}
+                    </div>
+                  {/* <ul>{product.description.map(person => <li key={person}> {person} </li>)}</ul> */}
+                  {/* {product.description.map((str,index) => {
+                    console.log(str);
+                    return (
+                      <ul className="mt-4">
+                      <li className='text-muted'>{str}</li>
+                        </ul>
+                    )
+                   })};
+                 */}
+                  {/* <ul> */}
+                    {/* console.log(fname) */}
+                 {/* let aaa = {product.description.map((str,index)=> ({value:str, id:index+1}))}
+                 console.log(aaa); */}
+                    {/* {product.description.map((person)=>{
+                    let aaw =  person.split('/r/n');
+                      console.log(aaw);
+                    })} */}
+                    {/* <li className='text-muted'>Interior/furnishing in progress and should be ready by 20th August</li>
                     <li  className='text-muted mt-2'>A smart one bedroom penthouse + sitting room with automated home features</li>
                     <li  className='text-muted mt-2'>Bedroom area , a modern wardrobe ,open plan kitchen</li>
                     <li  className='text-muted mt-2'>High quality beddings & furniture</li>
@@ -482,7 +526,7 @@ export default function GraphSection () {
                     <li  className='text-muted mt-2'>A personalized lounge area</li>
                     <li  className='text-muted mt-2'>Intended for short-let or Airbnb</li>
                     <li  className='text-muted mt-2'>Total worth includes; Base price, documentation, furnishing & interior remodeling , insurance, brokerage fees</li>
-                  </ul>
+                  </ul> */}
                 </section>
               </div>
             </section>
