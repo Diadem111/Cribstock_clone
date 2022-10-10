@@ -9,61 +9,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMessage} from '@fortawesome/free-solid-svg-icons';
+import {basicSchema} from "../../src/components/schema/schema";
 
 
 
 
 export default function Signup() {
+
+   const onSubmit= () => {
+      console.log("submitted")
+   }
       const Logup =() => {
-         const formik = useFormik({
+         const {values,errors,handleBlur,handleChange,handleSubmit} = useFormik({
             initialValues:{
                firstname:"",
                lastname :"",
                username:"",
                email:"",
                confirmemail:"",
-               bvn:"", 
+               number:"", 
                password:"",
                confirmPassword:""
             },
-            onSubmit : (values)=>{
-               console.log(values);
-            },
-            validate : (values) => {
-              let errors = {}
-              if(values.firstname==""){
-               errors.firstname = "This field is required"
-              }
-              if(values.lastname==""){
-               errors.lastname = "This field is required"
-              }
-              if(values.username==""){
-               errors.username  = "This field is required"
-              }
-              if(values.email==""){
-               errors.email = "This field is required"
-              }
-              if(values.confirmemail==""){
-               errors.confirmemail = "This field is required"
-              }
-              if(values.bvn==""){
-               errors.bvn = "This field is required"
-              }
-              if(values.password==""){
-               errors.password = "This field is required"
-              }
-              if(values.confirmPassword==""){
-               errors.confirmPassword = "This field is required"
-              }
-              return errors
-            }
-         
-         })
-         console.log(formik.errors);   
-         var size = Object.keys(formik.errors).length;
-         console.log(size);
+            validationSchema :basicSchema, 
 
-         // console.log();   
+            onSubmit,
+           
+         })
+         
+         console.log(errors);   
         return (
             <>
             <section className='container-fluid contain'>
@@ -105,17 +79,17 @@ export default function Signup() {
                                 Please fill in all fields correctly
                             </p>
                          </div>
-                          <form action="" onSubmit={formik.handleSubmit} className="form1">
+                          <form action="" onSubmit={handleSubmit} className="form1">
                            <div className='row mb-3'>
                                 <div className='col'>
                                 <label for="FirstnameInput" className="form-label">
                                     First name
                                 </label>
                                 <input type="text" className='form-control' 
-                                onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                onChange={handleChange} onBlur={handleBlur}
                                 name='firstname' width="50px" />
-                                {formik.touched.firstname ?
-                                <div className='text-danger'>{formik.errors.firstname}</div>
+                                {touched.firstname ?
+                                <div className='text-danger'>{errors.firstname}</div>
                                      :"" }
                                </div>
                              <div className='col'>
@@ -124,10 +98,10 @@ export default function Signup() {
                                 </label>
                                 <input type="text" 
                                 className='form-control' 
-                                onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                onChange={handleChange} onBlur={handleBlur}
                                 name='lastname' />
-                                {formik.touched.lastname ? 
-                                 <div className='text-danger'>{formik.errors.lastname}</div>
+                                {touched.lastname ? 
+                                 <div className='text-danger'>{errors.lastname}</div>
                                  : ""}
                              </div>
                            </div>
@@ -136,9 +110,9 @@ export default function Signup() {
                                     Username
                                 </label>
                                 <input type="text" className='form-control'
-                                 onChange={formik.handleChange} onBlur={formik.handleBlur} name='username' />
-                                 {formik.touched.username ? 
-                                 <div className='text-danger'>{formik.errors.username}</div>
+                                 onChange={handleChange} onBlur={handleBlur} name='username' />
+                                 {touched.username ? 
+                                 <div className='text-danger'>{errors.username}</div>
                                  : ""}
                              </div>
                              <div className='mb-3'>
@@ -146,10 +120,10 @@ export default function Signup() {
                                     Email
                                 </label>
                                 <input type="email" className='form-control'
-                                 onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                 onChange={handleChange} onBlur={handleBlur}
                                 name='email' />
-                                {formik.touched.email ?
-                                 <div className='text-danger'>{formik.errors.email}</div>
+                                {touched.email ?
+                                 <div className='text-danger'>{errors.email}</div>
                                 : ""}
                              </div>
                              <div className='mb-3'>
@@ -157,14 +131,14 @@ export default function Signup() {
                                    Confirm email
                                 </label>
                                 <input type="email" className='form-control' 
-                                 onChange={formik.handleChange} onBlur={formik.handleBlur} name='confirmemail' />
-                                 {formik.touched.confirmemail ?
-                                  <div className='text-danger'>{formik.errors.confirmemail}</div>
+                                 onChange={handleChange} onBlur={handleBlur} name='confirmemail' />
+                                 {touched.confirmemail ?
+                                  <div className='text-danger'>{errors.confirmemail}</div>
                                  : ""}
                              </div>
                              <div className='mb-3'>
                                 <label for="bvnInput" className="form-label">
-                                   Bank verfication number (BVN) 
+                                   Phone number 
                                    <span>
                                     <Link to="/">
                                         <button className='btn btn-rounded mt-1 mx-2 why '>
@@ -173,10 +147,10 @@ export default function Signup() {
                                     </Link>
                                    </span>
                                 </label>
-                                <input type="number" className='form-control' 
-                                 onChange={formik.handleChange}  onBlur={formik.handleBlur} name='bvn' />
-                                 {formik.touched.bvn ?
-                                <div className='text-danger'>{formik.errors.bvn}</div>
+                                <input type="text" className='form-control' 
+                                 onChange={handleChange}  onBlur={handleBlur} name='number' />
+                                 {touched.number ?
+                                <div className='text-danger'>{errors.number}</div>
                                  : ""}
                                 <small className='text-muted'>Dial *565*0# to get your BVN number</small>
                              </div>
@@ -185,9 +159,9 @@ export default function Signup() {
                                    Password
                                 </label>
                                 <input type="password" className='form-control'  
-                                onChange={formik.handleChange} onBlur={formik.handleBlur} name='password' />
-                                {formik.touched.password ?
-                                <div className='text-danger'>{formik.errors.password}</div>
+                                onChange={handleChange} onBlur={handleBlur} name='password' />
+                                {touched.password ?
+                                <div className='text-danger'>{errors.password}</div>
                                   :"" }
                              </div>
                              <div className='mb-3'>
@@ -195,9 +169,9 @@ export default function Signup() {
                                    Confirm password
                                 </label>
                                 <input type="password" className='form-control' 
-                                 onChange={formik.handleChange} onBlur={formik.handleBlur} name='confirmPassword' />
-                                 {formik.touched.confirmPassword ?
-                                <div className='text-danger'>{formik.errors.confirmPassword}</div>
+                                 onChange={handleChange} onBlur={handleBlur} name='confirmPassword' />
+                                 {touched.confirmPassword ?
+                                <div className='text-danger'>{errors.confirmPassword}</div>
                                  :""}
                              </div>
                              {/* for checkbox */}
@@ -217,7 +191,7 @@ export default function Signup() {
                                               </label>
                                </div>
                                   {/* checkbox ends here */}
-                                  <button className='reg' disabled={size>0}>Register</button>
+                                  <button className='reg' disabled={!formik.isValid}>Register</button>
                            </form>
                            <div className='row'>
                               <div className='col-12 coll'>
