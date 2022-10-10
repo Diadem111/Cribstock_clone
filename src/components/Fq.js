@@ -3,14 +3,17 @@ import "../Fq.css";
 import Accordion from 'react-bootstrap/Accordion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMessage} from '@fortawesome/free-solid-svg-icons';
+import Footer from "./Footer";
+import Header from "./Header";
 
 
 
 
 export default function Fq() {
-  return (
-    <>
-    <section className='container-fluid'>
+  const FqStaff = () => {
+    return (
+      <>
+        <section className='container-fluid'>
         <main className='row bgrow'>
             <div className='col-12'>
                  <h1 className='text-start mt-5 pt-5 ms-5 '>Frequently asked questions
@@ -125,6 +128,15 @@ export default function Fq() {
     <FontAwesomeIcon icon={faMessage} size="lg" color="white"  id="icon" />
     {/* <FontAwesomeIcon icon="fa-solid fa-message-question" color="white" /> */}
     </div>
-    </>
+
+      </>
+    )
+  }
+  return (
+    <>
+    <Header/>
+    <FqStaff/>
+    <Footer/>
+      </>
   )
 }

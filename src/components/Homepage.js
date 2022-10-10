@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMessage} from '@fortawesome/free-solid-svg-icons';
 import Tab from "./Tab";
 import Footer from "./Footer";
+import { Link, Navigate, useLocation,useNavigate } from "react-router-dom";
 
 
 
@@ -27,7 +28,10 @@ function Homepage() {
           <h3 className="chh">Make a new monthly income right now.</h3>
           <p className="phh">Co-owning properties on Cribstock allows you to become a landlord
              in five minutes and collect rent from a single renter or a group of tenants each month.</p>
+             <Link to="/signup">
              <button className="but1">Start now </button>
+             </Link>
+            
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item  className="drk">

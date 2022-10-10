@@ -2,11 +2,14 @@ import React from 'react';
 import "../About.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMessage} from '@fortawesome/free-solid-svg-icons';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 
 export default function About() {
-  return (
-    <>
+  const AboutStaff = () => {
+    return (
+      <>
        <main className=' container-fluid cont1'>
             <div className=' row hi1 '>
                 <div className=' col-lg-6 col-md-8 col-8  mx-auto  '>
@@ -123,6 +126,15 @@ export default function About() {
     <FontAwesomeIcon icon={faMessage} size="lg" color="white"  id="icon" />
     {/* <FontAwesomeIcon icon="fa-solid fa-message-question" color="white" /> */}
     </div>
-    </>
+
+      </>
+    )
+  }
+  return (
+    <>
+     <Header/>
+     <AboutStaff/>
+     <Footer/>
+   </>
   )
 }

@@ -25,6 +25,24 @@ box-sizing: border-box;
      width: 90%;
   justify-items: center;
   }
+  #hqq{
+  margin-top:-48px;
+  margin-left:100px;
+  padding: 0;
+  overflow: hidden;
+  font-size: 16px;
+  /* font-weight: bold; */
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+#pqq{
+  margin-top:-1px;
+  margin-left:100px;
+    overflow: hidden;
+    font-size: 13px;
+    /* font-weight: bold; */
+    font-family: loto;
+}
+
   @media screen and (max-width:960px) {
     .cont{
       width:100%;

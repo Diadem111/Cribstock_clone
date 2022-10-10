@@ -7,6 +7,8 @@
 // import { Button } from "bootstrap";
 import Button from 'react-bootstrap/Button';
 import styled from "styled-components";
+import { Link, Navigate, useLocation,useNavigate } from "react-router-dom";
+
 
 
 
@@ -38,15 +40,18 @@ import styled from "styled-components";
           <Navbar.Toggle aria-controls="basic-navbar-nav"id="toggle" />
            <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mx-auto pe-5">
-             <Nav.Link href="#home" className="fw-bold pe-5 " id="linkid">Stocks</Nav.Link>
-             <Nav.Link href="#home" className="fw-bold pe-5 " id="linkid">FAQ</Nav.Link>
-             <Nav.Link href="#home" className="fw-bold pe-5 " id="linkid">About</Nav.Link>
-             <Nav.Link href="#home" className="fw-bold pe-5 " id="linkid">Team</Nav.Link>
+             <Link to="/dashboard/invest" className="fw-bold pe-5 " id="linkid">Stocks</Link>
+             <Link to="fq" className="fw-bold pe-5 " id="linkid">FAQ</Link>
+             <Link to="/about" className="fw-bold pe-5 " id="linkid">About</Link>
+             <Link to="/fq" className="fw-bold pe-5 " id="linkid">Team</Link>
               </Nav>
               <Nav>
-              <Button className="mt-1" id="but1">Login</Button>
-            <Button className="ms-2 mt-1" id="but1">Sign up</Button>
-
+                <Link to="/login">
+                <Button className="mt-1" id="but1">Login</Button>
+                </Link>
+                <Link to="/signup">
+                <Button className="ms-2 mt-1" id="but1">Sign up</Button>
+                </Link>
               </Nav>
            </Navbar.Collapse>
         </Container>

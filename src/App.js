@@ -25,6 +25,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Responsive from "./components/Slider";
 import Testing from "./components/Testing";
 import Sidebar from "./components/Sidebar/Sidebar";
+import {NotFound} from "./Pages/NotFound/NotFound";
 
  function App() {
   const activeMenu = true;
@@ -39,7 +40,8 @@ import Sidebar from "./components/Sidebar/Sidebar";
             </Route>
             <Route  path="/about" exact  element={<About/>}>
            </Route>
-
+           <Route  path="/login"   element={<Login/>}>
+            </Route>
             <Route  path="/fq" exact  element={<Fq/>}>
             </Route>
             <Route  path="/dashboard"   element={<Main/>}>
@@ -56,6 +58,8 @@ import Sidebar from "./components/Sidebar/Sidebar";
             <Route  path="/dashboard/product" exact  element={<Product/>}>
             </Route>
             <Route  path="/Graph/:personid" exact  element={<Graph/>}>
+            </Route>
+            <Route  path="*" exact  element={<NotFound/>}>
             </Route>
            
 

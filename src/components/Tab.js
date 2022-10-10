@@ -1,11 +1,33 @@
-import React from "react";
+import React, {useEffect,useState}  from "react";
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faExclamationCircle,faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import "../Tab.css"
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "./Footer";
+import { Link, useLocation,useNavigate } from "react-router-dom";
+import {getEstate} from "../redux/apiCalls";
 export default function Tab() {
-  const Body = ()=>{
+  const navigate = useNavigate();
+  const [product,setProduct] = useState([]);
+  const dispatch = useDispatch(); 
+  const userProducts = useSelector((state) => state.product.cribs);
+  // let aa = userProducts;
+  const ab = userProducts.map((product)=> {
+    return product
+  })
+  // console.log(ab)
+  // setProduct(ab);
+  // console.log(product)
+  // console.log(aa);
+
+   
+  const Body = ()=>{ 
+    useEffect(() => {
+      getEstate(dispatch);   
+
+  }, [dispatch]);
+  
     return (
       <>
       <div className="container-fluid  big">
@@ -196,71 +218,45 @@ export default function Tab() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-          <div className="div1">
-            <figure className="figure"> <img src="/house1.jpg" alt="" width="40px" height="40px" className="magic"/>
-               </figure>
-                  <h6 id="h">HKLEY</h6>
-                  <p id="p">Hockley millennial tower.</p>
-           </div>
-
-               </td>
-          <td className="pt-4">#11,937.65</td>
-          <td className="pt-4">#59,688,246.47</td>
-          <td className="pt-4">27.70%</td>
-          <td className="pt-4">90.80%</td>
-          <td className="pt-4">#30,888,999.67</td>
-          <td className="pt-4">2497</td>
-          <td>
-            <button className="but1 mt-2">Invest</button>
-          </td>
-        </tr>
-        <tr>
-        <td>
-          <div className="div1">
-            <figure className="figure"> <img src="/house1.jpg" alt="" width="40px" height="40px" className="magic"/>
-               </figure>
-                  <h6 id="h">HKLEY</h6>
-                  <p id="p">Hockley millennial tower.</p>
-           </div>
-               </td>
-
-          <td className="pt-4">#11,937.65</td>
-          <td className="pt-4">#59,688,246.47</td>
-          <td className="pt-4">27.70%</td>
-          <td className="pt-4">90.80%</td>
-          <td className="pt-4">#30,888,999.67</td>
-          <td className="pt-4 pl-5">2497</td> 
-          <td>
-            <button className="but1 mt-2">Invest</button>
-          </td>
-             </tr>
-        <tr>
-        <td>
-          <div className="div1">
-            <figure className="figure"> <img src="/house1.jpg" alt="" width="40px" height="40px" className="magic"/>
-               </figure>
-                  <h6 id="h">HKLEY</h6>
-                  <p id="p">Hockley millennial tower.</p>
-           </div>
-               </td>
-          <td className="pt-4">#11,937.65</td>
-          <td className="pt-4">#59,688,246.47</td>
-          <td className="pt-4">27.70%</td>
-          <td className="pt-4">90.80%</td>
-          <td className="pt-4">#30,888,999.67</td>
-          <td className="pt-4">2497</td>
-          <td>
-            <button className="but1 mt-2">Invest</button>
-          </td>
-            </tr>    
+        {ab.map((person) => {
+          return (
+            <tr>
+            <td>
+            <div className="div1" key={person._id}>
+              <figure className="figure"> <img src={person.cloudinary_id_img[0].secure_url} alt="img"  width="40px" height="40px" className="magic"/>
+                 </figure>
+                    <h6 id="hqq">{person.name}</h6>
+                    <p id="pqq">{person.location.substring(0,20)}...</p>
+             </div>
+  
+                 </td>
+            <td className="pt-4">#{person.price}</td>
+            <td className="pt-4">#{person.market_price}</td>
+            <td className="pt-4">{person.days}%</td>
+            <td className="pt-4">{person.year}%</td>
+            <td className="pt-4">#{person.volume}</td>
+            <td className="pt-4">{person.available_supply}</td>
+            <td>
+            <button className="but1 mt-2" onClick={()=>{
+                   navigate(`/Graph/${person._id}`)
+                  }}>Invest
+            </button>
+             </td>
+          </tr>
+          )
+        })}
+      
+           
       </tbody>
     </Table>
 
     </div>
     <div className="container-fluid mdd ">
-      <button id="btt">Explore stocks 
+      <button id="btt"
+      onClick={() => {
+        navigate(`/signup`)
+      }}
+      >Explore stocks 
       <FontAwesomeIcon icon={faArrowRight} id="arrow"/>
       </button>
     </div>

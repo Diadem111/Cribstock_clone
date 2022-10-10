@@ -90,12 +90,12 @@ const url = "http://localhost:4000/user/getdoc/";
                </div>
     
                    </td>
-              <td className="pt-4">#{person.price}</td>
-              <td className="pt-4">#{person.market_price}</td>
-              <td className="pt-4 text-success">{person.days}%</td>
-              <td className="pt-4 text-success">{person.year}%</td>
-              <td className="pt-4">#{person.volume}</td>
-              <td className="pt-4">{person.available_supply}</td>
+              <td className="pt-4 fw-bold">#{person.price}</td>
+              <td className="pt-4 fw-bold">#{person.market_price}</td>
+              <td className="pt-4 fw-bold text-success">{person.days}%</td>
+              <td className="pt-4 fw-bold text-success">{person.year}%</td>
+              <td className="pt-4 fw-bold">#{person.volume}</td>
+              <td className="pt-4 fw-bold">{person.available_supply}</td>
               <td>
                 <button className="but1 mt-2" onClick={()=>{
                            navigate(`/Graph/${person._id}`)

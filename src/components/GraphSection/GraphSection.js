@@ -10,8 +10,7 @@ import {AiOutlineArrowLeft} from "react-icons/ai";
 import {AiOutlineArrowRight} from "react-icons/ai";
 import { Link, useParams } from 'react-router-dom';
 import ReactDOM from "react-dom";
-
-
+import Skeleton from 'react-loading-skeleton';
 // import {ChartComponent , SeriesCollectionDirective , SeriesDirective , Inject , HiloSeries,Tooltip, DateTime , Zoom , Logarithmic , Crosshair } from "@syncfusion/ej2-react-charts";
 import { FinancialChartData, FinancialPrimaryXAxis, FinancialPrimaryYAxis } from "../../Data/Data";
 import axios from "axios";
@@ -31,8 +30,8 @@ import {
 } from 'recharts';
 import {format, parseISO, subDays} from "date-fns";
 import { IoMdPricetags } from 'react-icons/io';
-import {AiOutlineExclamationCircle} from "react-icons/ai";
 import Modal from "../Modal/Modal";
+import { PriceSection } from '../PriceSection/PriceSection';
 
 
 // import {
@@ -94,49 +93,80 @@ const data = [
   //   amt: 2100,
   // },
 ];
-
-for (let num = 30 ; num >=0; num--) {
-  data.push({
-    date:subDays(new Date(), num).toISOString().substring(0,10),
-    price: 1 + Math.random()
-  })
-}
+   
 
 
 
 export default function GraphSection () {
   const [showOverlay, setShowOverlay] = useState(false);
-const [product,setProduct] = useState({});
+  const [product,setProduct] = useState({});
+  const [loading, setLoading] = useState(false);
+   let myArray = {};
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const url = `http://localhost:4000/user/find/`+id;
 
    const params = useParams();
    useEffect(() => {
-     const getProduct = async () => {
-      try {
-        await axios.get(url).then((res)=>{
-          // console.log(res.data);
-          if(res.data){
-            let myArray = res.data;
-            // console.log(myArray);
-             setProduct(res.data);
-             console.log(product);
-          }
-        })
-          }catch (error) {
-            console.log(error);
-          }
-     }
-       getProduct();
-   }, [id]);
+            getProduct();
+   }, []);
        
+   async function getProduct(){
+    setLoading(true);
+    try {
+      await axios.get(url).then((res)=>{
+        // console.log(res.data);
+        if(res.data){
+           myArray = res.data;
+          console.log(myArray);
+           setProduct(res.data);
+           console.log(product);
+        }
+      })
+      setLoading(false);
+        }catch (error) {
+          console.log(error.message);
+        }
+   }
+
+   const keys = Object.keys(product);
+   let num = product[keys[3]];
+   const naa = parseFloat(num?.replace(/,/g, ""));
+  //  alert (ddqq)
+      //  let aa = product.price;
+      //  console.log(aa);
+      const months = 6;
+   for (let num = 5; num >=0; num--) {
+    data?.push({
+      date:subDays(new Date(), num).toISOString().substring(0,10),
+      price:naa,
+    })
+  }
+    // for loading skeleton
+    const Loading = () => {
+      return (
+        <>
+        <div className="col-md-6">
+        <Skeleton height={400}/>
+        </div>
+        <div className="col-md-6" style={{lineHeight:2}}>
+        <Skeleton height={50} width={300}/>
+         <Skeleton height={75} /><Skeleton height={25} width={150}/>
+         <Skeleton height={50} />
+         <Skeleton height={150} />
+         <Skeleton height={50} width="100" style={{marginLeft:6}} />
+        </div>
+        </>
+      )
+    }
+    //  skeleton ends here  
 
 
+    // chart start here
   const GramTool = () => {
     const  CustomTooltip = ({active, payload , label} ) =>  {
       console.log({label})
-      console.log("ggg")
+      // console.log("ggg")
       // console.log(<p>{payload[0].value.toFixed(2)}</p>)
        if (active) {
        return ( 
@@ -145,7 +175,6 @@ const [product,setProduct] = useState({});
            <h4>{format(parseISO(label), "eeee, d MMM, yyyy")}</h4>
              <p>{payload[0].value.toFixed(2)}</p>
          </div>
-        
        );
          }
        return null;
@@ -154,13 +183,13 @@ const [product,setProduct] = useState({});
     return (
       <>
  <content className=" ">
-      <div className=" ms-lg-5 ms-0 ps-0 mt-lg-5 pt-lg-5 mt-3  ww ">
+      <div className=" ms-lg-5 ms-0 ps-0   ww ">
         <div>
-          <h2 className='fw-bolder mt-5 ms-lg-0 ms-3 ps-lg-0 ps-3'>{product.name}</h2>
+          <h2 className='fw-bolder mt-5 ms-lg-0 ms-3 ps-lg-0 ps-3'>{product?.name}</h2>
             <span className='d-flex flex-row ms-lg-0 ms-3 ps-lg-0 ps-3'>
               <GoLocation className=''/>
               
-              <p className="ms-lg-0">{product.location}    </p>
+              <p className="ms-lg-0">{product?.location?.substring(0,60)}...    </p>
                
             </span>
         </div>
@@ -181,11 +210,12 @@ const [product,setProduct] = useState({});
                 </linearGradient>
               </defs>
               <Area dataKey="price" type="monotone"
-            stroke="#8884d8"
-            fill="url(#colorValue)"/>
+            stroke="blue" fill="none"
+            />
 
               <XAxis  dataKey="date" axisLine={false} 
               tickLine={false} 
+              // tickCount={7}
               tickFormatter={(string) => {
                 const date = parseISO(string);
                 if (date.getDate() % 1 === 0) {
@@ -196,16 +226,16 @@ const [product,setProduct] = useState({});
               />
 
             <YAxis dataKey="price" 
-          // axisLine={false} 
+          axisLine={false} 
           tickLine={false} 
-          tickCount={8}
-            tickFormatter={number => `#${number.toFixed(2)}`}
+          tickCount={5}
+            tickFormatter={number => `#${number.toFixed(0)}`}
             />
 
               <Tooltip      
-                     wrapperStyle={{ backgroundColor: "red" }}
-            labelStyle={{ color: "green" }}
-            itemStyle={{ color: "cyan" }}
+                 wrapperStyle={{ backgroundColor: "red" }}
+            labelStyle={{ color: "black" }}
+            itemStyle={{ color: "blue" }}
             formatter={function(price, name,label) {
               return `${price}`;
             }}
@@ -214,7 +244,7 @@ const [product,setProduct] = useState({});
             }}
               />
 
-              <CartesianGrid  opacity={0.1} strokeDashArray="3 3" vertical={false}/>
+              <CartesianGrid  opacity={0.5} strokeDashArray="10 5"  vertical={true}/>
           </AreaChart>
         </ResponsiveContainer>
           </div>
@@ -224,8 +254,10 @@ const [product,setProduct] = useState({});
       </>
     )
   }
+  // chart ends here
 
   
+  // slider start here
   const NextPage = () => {
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
       <img src="/right.png" alt="prevArrow" {...props} />
@@ -254,10 +286,10 @@ const [product,setProduct] = useState({});
     const [currentIndex, setCurrentIndex] = useState(null);
 
   
-    const HandleClickSlide = (item,index) => {
-      console.log(item);
+    const HandleClickSlide = (img,index) => {
+      console.log(img);
       setCurrentIndex(index);
-      setShowOverlay(item.Img);
+      setShowOverlay(img);
         
       
     };
@@ -335,7 +367,18 @@ const [product,setProduct] = useState({});
             }
           }
         ]
-      }
+      } 
+      // const Nation = () => {
+      //   {product?.cloudinary_id_img?.map((person,index) => {
+      //     console.log(person.secure_url);
+      //     return (
+      //       <div key={index} className="wrapper-images">
+      //         <img className='gr test ' src={person.secure_url} alt="img" onClick={()=>
+      //         HandleClickSlide (person.secure_url,index) }/>
+      //      </div>
+      //     )
+      //   })}
+      // }
       return (
         <div className='q ms-lg-5 ms-3  '>
            <section className="">
@@ -345,13 +388,15 @@ const [product,setProduct] = useState({});
            </div>
         </section>
           
-          <Slider {...settings}>
-             {productSlideImg.map((item,index)=> (
+          <Slider {...settings}>             
+          {product?.cloudinary_id_img?.map((img,index) => {
+            return (
               <div key={index} className="wrapper-images">
-                <img className='gr test ' src={item.Img} alt={item.ImgName} onClick={()=>
-                HandleClickSlide (item,index) }/>
-             </div>                  
-              ))}  
+              <img className='gr test ' src={img.secure_url} alt="img" onClick={()=>
+              HandleClickSlide (img.secure_url,index) }/>
+           </div>
+            )
+           })}  
           </Slider>
          
         {/* {productSlideImg.forEach (item => {
@@ -365,179 +410,21 @@ const [product,setProduct] = useState({});
        handleRotationLeft = {handleRotationLeft}
        />
         }
-         
-                </div>
-      );
-    
-
-     
+       </div>
+      );  
   }
-  const PriceSection = () => {
-    const NamesList = async () => (
-      <div>
-        <ul>
-      {/* {product.description.map(person => <li key={person} 
-        className="text-muted mt-2">{person}</li>)} */}
-        </ul>
-      </div>
-    )
+  //  slider ends here
     return (
-            <>
-            <section className="mt-lg-5 mt-5 pt-lg-0 pt-5 ms-2">
-              <div className="row mt-lg-5 mt-5 pt-lg-0 pt-5 ms-2">
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> Price</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="fw-bolder">{product.price}</p>
-                  </div>
-                </div>
-                {/* end of first */}
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold">Market cap</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="fw-bolder">{product.market_price}</p>
-                  </div>
-                </div>
-                {/* end */}
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> 30d</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="text-success fw-bolder">{product.days}%</p>
-                  </div>
-                </div>
-                {/* end */}
-                <div className="col-4 col-lg-3">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> 1y</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="text-success fw-bolder">{product.year}%</p>
-                  </div>
-                </div>
-                {/* end */}
-              </div>
-              {/* second row */}
-              <div className="row mt-3 ms-2">
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> Volume</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="fw-bolder">#{product.volume}</p>
-                    <p>0</p>
-                  </div>
-                </div>
-                {/* end of first */}
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold">Available supply</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="fw-bolder">{product.available_supply}</p>
-                  </div>
-                </div>
-                {/* end */}
-                <div className="col-lg-3 col-4">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> Circulating supply</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="text-success fw-bolder">{product.Circulating_supply}</p>
-                  </div>
-                </div>
-                {/* end */}
-                <div className="col-4 col-lg-3">
-                  <div className="">
-                    <span className="d-flex flex-row">
-                      <p className="fw-bold"> Average volume</p>
-                      <p>
-                        <AiOutlineExclamationCircle className='ms-3 '/>
-                      </p>
-                    </span>
-                    <p className="text-danger fw-bolder">{product.Average_volume}</p>
-                  </div>
-                </div>
-                {/* end */}
-                <div className="row">
-                  <h4 className="fw-bolder mt-3 ms-3">Location</h4>
-                  <p className="text-muted ms-3">
-                  {product.location}
-                  </p>
-                </div>
-                {/* end */}
-                <section>
-                  <h4 className="fw-bolder ms-3 mt-2">Description</h4>
-                    <div className=''>
-                    {/* <NamesList/> */}
-                    </div>
-                  {/* <ul>{product.description.map(person => <li key={person}> {person} </li>)}</ul> */}
-                  {/* {product.description.map((str,index) => {
-                    console.log(str);
-                    return (
-                      <ul className="mt-4">
-                      <li className='text-muted'>{str}</li>
-                        </ul>
-                    )
-                   })};
-                 */}
-                  {/* <ul> */}
-                    {/* console.log(fname) */}
-                 {/* let aaa = {product.description.map((str,index)=> ({value:str, id:index+1}))}
-                 console.log(aaa); */}
-                    {/* {product.description.map((person)=>{
-                    let aaw =  person.split('/r/n');
-                      console.log(aaw);
-                    })} */}
-                    {/* <li className='text-muted'>Interior/furnishing in progress and should be ready by 20th August</li>
-                    <li  className='text-muted mt-2'>A smart one bedroom penthouse + sitting room with automated home features</li>
-                    <li  className='text-muted mt-2'>Bedroom area , a modern wardrobe ,open plan kitchen</li>
-                    <li  className='text-muted mt-2'>High quality beddings & furniture</li>
-                    <li  className='text-muted mt-2'>Fully finished kitchen area with a cooker, microwave, heat extractor, washing machine and smoke detectors</li>
-                    <li  className='text-muted mt-2'>Fingerprint or card door access, doorbell & cameras</li>
-                    <li  className='text-muted mt-2'>A car parking space</li>
-                    <li  className='text-muted mt-2'>Good electricity and water supply</li>
-                    <li  className='text-muted mt-2'>A personalized lounge area</li>
-                    <li  className='text-muted mt-2'>Intended for short-let or Airbnb</li>
-                    <li  className='text-muted mt-2'>Total worth includes; Base price, documentation, furnishing & interior remodeling , insurance, brokerage fees</li>
-                  </ul> */}
-                </section>
-              </div>
-            </section>
-            </>
-            )
-  }
-    return (
-        <div className=''>
-        <GramTool/>
-        <NextPage/>
-        <PriceSection/>
+        <div className='container py-5'>
+          <div className='row py-4'>
+            {loading ? <Loading/> :
+            <div>
+             <GramTool/>
+             <NextPage/>
+             <PriceSection  data={product}/>
+            </div>
+               }
+          </div>
         </div>
         
 
