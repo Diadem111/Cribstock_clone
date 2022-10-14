@@ -25,7 +25,7 @@ import { Link, Navigate, useLocation,useNavigate } from "react-router-dom";
                 window.addEventListener('scroll', changeNavbarColor);
                 return (
                     <>
-                      <Navbar   expand="lg" id="nav" className={colorChange ? "navbar colorChange"  : "navbar" }  >
+                      <Navbar expand="sm" id="nav" className={colorChange ? "navbar colorChange"  : "navbar" }  >
         <Container >
           <Navbar.Brand href="#home" >
             <img

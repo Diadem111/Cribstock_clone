@@ -6,6 +6,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {BsBookFill} from "react-icons/bs";
 import {Link} from "react-router-dom";
+import { useDispatch,useSelector } from 'react-redux';
 
 import {BiDotsVerticalRounded} from "react-icons/bi";
 
@@ -13,12 +14,16 @@ import {BiDotsVerticalRounded} from "react-icons/bi";
 export default function Trade () {
     const [show, setShow] = useState(false);
   const target = useRef(null);
+  let currentUser = useSelector((state) => state.users.currentuser);
+  console.log(currentUser);
+  let data = currentUser;
+
 
     return (
         <>
         <section className="App5">
            <div className="AppGlass5">
-            <Sidebar/>
+            <Sidebar userData={data}/>
             <main className="list5">
               <section>
                 <div className=" d-flex flex-row mt-lg-5 mt-3 ms-lg-3 ms-5 ps-4">

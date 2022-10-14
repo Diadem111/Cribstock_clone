@@ -5,14 +5,21 @@ import Sidebar from "../Sidebar/Sidebar";
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
 
 import {faExclamationCircle,faArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 
 
 export default function Investment () {
-  const [document,setDocument] = useState([]);
-  const navigate = useNavigate()
+  const [product,setProduct] = useState([]);
+  const dispatch = useDispatch(); 
+  const [document,setDocument] = useState([]); 
+  const navigate = useNavigate();
+  let currentUser = useSelector((state) => state.users.currentuser);
+  console.log(currentUser);
+  let data = currentUser;
+
 
   const [error,setError] = useState(null);
   const [filter, setfilter] = useState(document);
@@ -20,42 +27,26 @@ export default function Investment () {
 const url = "http://localhost:4000/user/getdoc/";
 
       useEffect(() => {
-          axios.get(url).then((res) => {
-            if(res.data){
-              setDocument(res.data);
-              console.log(document);
-              let productArray = []
-              // setDocument(res.data);
-              // console.log(document);
-              // console.log(res.data);
+        axios.get(url).then((res) => {
+          console.log(res.data.user);
+          if(res.data){
+            setDocument(res.data?.user);
+            console.log(document);
+            let productArray = []
               res.data.forEach((doc)=>{
-                // console.log(doc);
-                // const obj = {
-                //   id:doc.id,
-                //    ...doc.data()
-                // }
-                // console.log(obj);
-                productArray.push(doc);
-              })
-              // setfilter(productArray);
-              // console.log(filter);
-              
-              // console.log(document);
-              // console.log(productArray);
-             
-
-            }
-            
-          }).catch((err) => {
-            setError(err.message);
-          })
+              productArray.push(doc);
+            })
+          }  
+        }).catch((err) => {
+          setError(err.message);
+        })
       }, [])
       
     return (
         <>
         <main className="App4">
             <section className="AppGlass4">
-                <Sidebar/>
+                <Sidebar userData={data}/>
                 <div className="list4">
                 <div className="container-fluid  mt-5 pt-5 justify-content-center cont">
                   <h5>Stocks</h5>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { BrowserRouter as Router,Routes,Redirect, Route } from 'react-router-dom';
+import { BrowserRouter as Router,Routes,Redirect, Route,Navigate } from 'react-router-dom';
 
 // import {Routes} from "react-router";
 // import { Route } from "react-router";
@@ -29,8 +29,11 @@ import {NotFound} from "./Pages/NotFound/NotFound";
 
  function App() {
   const activeMenu = true;
+  const token = localStorage.userToken;
+
   return (
-       
+    // {token ? 
+    //     <Ecommerce/> : <Navigate to="/signin"/>}
       //  <Router>
          <Routes>
             <Route  path="/" exact   element={<Homepage	/>}>
@@ -44,20 +47,20 @@ import {NotFound} from "./Pages/NotFound/NotFound";
             </Route>
             <Route  path="/fq" exact  element={<Fq/>}>
             </Route>
-            <Route  path="/dashboard"   element={<Main/>}>
+            <Route  path="/dashboard"   element={ token ? <Main/> : <Navigate to="/login"/>} >
             </Route>
-            <Route  path="/dashboard/portfolio" exact  element={<Portfolio/>}>
+            <Route  path="/dashboard/portfolio" exact  element={token ? <Portfolio/> : <Navigate to="/login"/>}>
             </Route>
-            <Route  path="/dashboard/wallet" exact  element={<Wallet/>}>
+            <Route  path="/dashboard/wallet" exact  element={token ? <Wallet/> : <Navigate to="/login"/>}>
             </Route>
-            <Route  path="/dashboard/invest" exact  element={<Investment/>}>
+            <Route  path="/dashboard/invest" exact  element={token ?<Investment/> : <Navigate to="/login"/>}>
             </Route>
 
-            <Route  path="/dashboard/trade" exact  element={<Trade/>}>
+            <Route  path="/dashboard/trade" exact  element={token ? <Trade/> : <Navigate to="/login"/>}>
             </Route>
-            <Route  path="/dashboard/product" exact  element={<Product/>}>
+            <Route  path="/dashboard/product" exact  element={token  ? <Product/> : <Navigate to="/login"/>}>
             </Route>
-            <Route  path="/Graph/:personid" exact  element={<Graph/>}>
+            <Route  path="/Graph/:personid" exact  element={token ? <Graph/> :<Navigate to="/login"/>}>
             </Route>
             <Route  path="*" exact  element={<NotFound/>}>
             </Route>

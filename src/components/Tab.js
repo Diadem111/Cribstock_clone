@@ -7,21 +7,58 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "./Footer";
 import { Link, useLocation,useNavigate } from "react-router-dom";
 import {getEstate} from "../redux/apiCalls";
+import axios from "axios";
+// import { useNavigate } from 'react-router-dom';
+
 export default function Tab() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [product,setProduct] = useState([]);
   const dispatch = useDispatch(); 
-  const userProducts = useSelector((state) => state.product.cribs);
+  const [document,setDocument] = useState([]);
+  const navigate = useNavigate()
+
+  const [error,setError] = useState(null);
+  const [filter, setfilter] = useState(document);
+
+
+  const url = "http://localhost:4000/user/getdoc/";
+
+  
+// const userProducts = useSelector((state) => state.Estate.owners);
   // let aa = userProducts;
-  const ab = userProducts.map((product)=> {
-    return product
-  })
-  // console.log(ab)
+  // let ff = userProducts ;
+  // console.log(ff);
+  // const ab = ff.map((product)=> {
+  //   return product
+  // })
+  // console.log(userProducts);
   // setProduct(ab);
   // console.log(product)
-  // console.log(aa);
-
+ 
+  
+   // console.log(aa);
    
+   
+    useEffect(() => {
+      axios.get(url).then((res) => {
+        console.log(res.data.user);
+        if(res.data){
+          console.log(res.data);
+          setDocument(res.data?.user);
+          console.log(document);
+          let productArray = []
+            res.data.forEach((doc)=>{
+            productArray.push(doc);
+          })
+
+
+        }
+        
+      }).catch((err) => {
+        setError(err.message);
+      })
+    }, [])
+    
   const Body = ()=>{ 
     useEffect(() => {
       getEstate(dispatch);   
@@ -218,35 +255,37 @@ export default function Tab() {
         </tr>
       </thead>
       <tbody>
-        {ab.map((person) => {
-          return (
-            <tr>
-            <td>
-            <div className="div1" key={person._id}>
-              <figure className="figure"> <img src={person.cloudinary_id_img[0].secure_url} alt="img"  width="40px" height="40px" className="magic"/>
-                 </figure>
-                    <h6 id="hqq">{person.name}</h6>
-                    <p id="pqq">{person.location.substring(0,20)}...</p>
-             </div>
-  
-                 </td>
-            <td className="pt-4">#{person.price}</td>
-            <td className="pt-4">#{person.market_price}</td>
-            <td className="pt-4">{person.days}%</td>
-            <td className="pt-4">{person.year}%</td>
-            <td className="pt-4">#{person.volume}</td>
-            <td className="pt-4">{person.available_supply}</td>
-            <td>
-            <button className="but1 mt-2" onClick={()=>{
-                   navigate(`/Graph/${person._id}`)
-                  }}>Invest
-            </button>
-             </td>
-          </tr>
-          )
-        })}
-      
-           
+      {document.map((person)=>{
+    //  let dd =   person.img1[0].public_id;
+    //  let dd =   person.img1.map(x => x[0].public_id);
+              // console.log(person._id);
+              // console.log(person.cloudinary_id_img[0].secure_url);
+             return (
+              <tr>
+              <td>
+              <div className="div1"  key={person._id}>
+                
+                <figure className="figure"> <img src={person.cloudinary_id_img[0].secure_url} alt="na img " width="40px" height="40px" className="magic"/>
+                   </figure>
+                      <h6 className="hqq ">{person.name}</h6>
+                      <p className="pqq">{person.location.substring(0,20)}...</p>
+               </div>
+    
+                   </td>
+              <td className="pt-4 fw-bold">#{person.price}</td>
+              <td className="pt-4 fw-bold">#{person.market_price}</td>
+              <td className="pt-4 fw-bold text-success">{person.days}%</td>
+              <td className="pt-4 fw-bold text-success">{person.year}%</td>
+              <td className="pt-4 fw-bold">#{person.volume}</td>
+              <td className="pt-4 fw-bold">{person.available_supply}</td>
+              <td>
+                <button className="but1 mt-2" onClick={()=>{
+                           navigate(`/Graph/${person._id}`)
+                         }}>Invest</button>
+              </td>
+            </tr>
+             )
+              })}  
       </tbody>
     </Table>
 

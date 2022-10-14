@@ -6,29 +6,46 @@ export const userSlice = createSlice({
         userDetails:[],
         currentuser:null,
         isFetching:false,
-        error:false,
+        error1:false,
     },
     reducers : {
      // get workers
-     getUserStart: (state) => {
+     addUserStart: (state) => {
         state.isFetching = true;
-        state.error = false;
+        state.error1 = false;
        },
-       getUserSuccess: (state,action) =>{
+       addUserSuccess: (state,action) =>{
            state.isFetching = false;
-           state.userDetails = action.payload;
+           state.userDetails.push(action.payload);
           },
-          getUserFailure: (state) =>{
+          addUserFailure: (state) =>{
            state.isFetching = false;
-           state.error= true;
-          },
-       
+           state.error1= true;
+          },  
+          loginStart :(state) => {
+            state.isFetching = true;
+        },
+        loginSuccess:(state,action) => {
+        state.isFetching = false;
+        state.currentuser = action.payload;
+        },
+        loginFailure: (state) => {
+            state.isFetching = false;
+            state.error1 = true;
+        },
+        logout :(state) => {
+            state.currentuser = null
+        },
+
     }
 });
 
 export const {
-    getUserFailure,
-    getUserStart,
-    getUserSuccess
+    addUserStart,
+    addUserSuccess,
+    addUserFailure,
+    loginFailure,
+    loginSuccess,
+    loginStart
 } = userSlice.actions;
 export default userSlice.reducer;

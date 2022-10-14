@@ -21,8 +21,8 @@ import {
   };
   
   const rootReducer = combineReducers({
-    product: EstateReducer,
-    user:userReducer,
+  Estate: EstateReducer,
+    users:userReducer,
   });
   
   const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -22,7 +22,7 @@ body{
     /* background-color: red; */
 }
 .btn1{
-    width: 500px;
+    width: 300px;
     height: 50px;
     border-radius: 10px;
     align-items: center;
@@ -34,9 +34,22 @@ body{
     background-color:rgba(13,36,54,1);
 
 }
+.btn1:disabled {
+    opacity: 0.35;
+}
 .edd {
     text-decoration: none;
     color:rgba(13,36,54,1) ;
     font-weight: bolder;
     
+}
+@media screen  and (max-width:768px){
+  .btn1{
+    width:200px;
+  }
+  .cardee{
+    width: 350px;
+     
+}
+
 }

@@ -10,6 +10,7 @@ import {BsCreditCard2BackFill}  from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import {AiOutlineExclamationCircle} from "react-icons/ai";
 // import {AiOutlineEyeInvisible} from "react-icons/ai";
+import { useDispatch,useSelector } from 'react-redux';
 
 
 
@@ -39,11 +40,15 @@ export default function Wallet () {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  let currentUser = useSelector((state) => state.users.currentuser);
+  console.log(currentUser);
+  let data = currentUser;
+
 
     return (
        <section className="App3">
         <div className="AppGlass3">
-            <Sidebar/>
+            <Sidebar userData={data}/>
             <div className="list3">
                <div className=" d-flex ms-1 ms-lg-5 dee">
                 <section className="col-12 col-md-6 col-lg-6 mt-5 pt-5 ">

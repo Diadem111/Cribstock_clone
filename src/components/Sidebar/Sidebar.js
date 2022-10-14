@@ -21,6 +21,8 @@ import Main from "../MainDash/Main";
 import Invest from "../Investment/Investment";
 import Trade from "../Trade/Trade";
 import { useNavigate } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 
 
@@ -66,6 +68,22 @@ const SidebarMenuItem = styled.li`
  
 
 `;
+const SidebarMenuItem1 = styled.div` 
+        height: 40px;
+        border-radius:0.7rem;
+        display:flex;
+        flex-direction:row;
+        text-decoration:none;
+        cursor:pointer;
+        color:#000;
+        margin-top:90px;
+        text-transform:uppercase;
+      
+       
+ 
+
+`;
+
 const Icon = styled.svg`
         width: 20px;
         height: 20px;
@@ -87,15 +105,32 @@ const SidebarMenuItemLabel = styled.p`
         font-size: 18px;
         font-weight:bold;
         line-height: 1.3;
+        width:30px;
         text-decoration:none;
-        font-eight: 600;
+        font-weight: 600;
         text-align: left;
         padding: 0px 20px;
         color:#000;
+        
         &:hover {
             color: var(--gray);
           transform :translateX(10px);
         }
+    
+`;
+const SidebarMenuItemLabel4= styled.div`
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        font-weight:bold;
+        line-height: 1.3;
+        margin-left:15px;
+        text-decoration:none;
+        font-weight: 600;
+        text-align: left;
+        padding: 0px 20px;
+        color:#000;
+        text-transform:uppercase;
+        
     
 `;
 const MenuSignOut = styled.div`
@@ -137,11 +172,11 @@ color: #ffffff;
 
 
 
-export default function Sidebar() {
-    // const [selected, setSelected] = useState(0);
+export default function Sidebar({userData}) {
+      // const [selected, setSelected] = useState(0);
 
-    const [expanded, setExpaned] = useState(true)
-  
+    const [expanded, setExpaned] = useState(true);
+    if (!userData) return ;
     const sidebarVariants = {
       true: {
         left : '0'
@@ -211,6 +246,41 @@ export default function Sidebar() {
                            <SidebarMenuItemLabel>Trade</SidebarMenuItemLabel>
                     </SidebarMenuItem>
                        </Link>
+                      
+                       <SidebarMenuItem1>
+                         {/* <Icon> */}
+                         {/* <BsPeople/> */}
+                         <div className='message1 fw-bolder text-capitalize'>
+                          <span className='text-capitalize span12 ms-1 mt-4'>
+                          {userData.firstname.substring(0,2)}
+
+                          </span>
+                         </div>
+                            {/* </Icon>                   */}
+                           <SidebarMenuItemLabel4>
+                           <Dropdown className="d-inline mx-2 fw-bolder text-dark text-capitalize " >
+                            <Dropdown.Toggle id="dropdown-autoclose-true">
+                              <span className='span12 text-dark'>
+                              {userData.firstname}
+                              </span>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                              <Dropdown.Item href="#">
+                               <div className="d-flex">
+                               <Icon>
+                            <FiLogOut/>
+                            </Icon>
+                            <p className="fw-bold ms-3">Logout</p>
+                               </div>
+                              </Dropdown.Item>
+                              
+                            </Dropdown.Menu>
+                          </Dropdown>
+
+                             </SidebarMenuItemLabel4> 
+                           </SidebarMenuItem1>
+
                     <MenuSignOut>
                         <Icon>
                             <FiLogOut/>
@@ -223,20 +293,7 @@ export default function Sidebar() {
                 </SidebarMenu>
             </SidebarContainer>
 
-      {/* {SidebarData.map((item, index) => {
-        return (
-          <div
-            className={selected === index ? "menuItem active" : "menuItem"}
-            key={index}
-            onClick={() => setSelected(index)}
-          >
-            
-            <item.icon />
-            <span>{item.heading}</span>
-            
-          </div>
-        );
-      })} */}
+      
       {/* signoutIcon */}
       <div className="menuItem">
         {/* <FiLogOut /> */}

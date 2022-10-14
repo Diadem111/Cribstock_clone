@@ -67,6 +67,8 @@
 .box2{
   position: relative;
   left:400px;
+  top: 0px;
+
   }
 .wee{
   width:80px;
@@ -74,6 +76,7 @@
   font-family: loto;
   color: #fff;;
   border-radius: 10px;
+  margin-left:-30px;
   background-color:rgb(61, 37, 37);
 }
 .mgg{
@@ -87,7 +90,9 @@
 .btnone {
   font-weight: bold;
   border-radius: 10px;
+  background-color: #dcdee6;
   font-family: loto;
+  margin-left: -30px;
 }
 .btntwo {
   height: 25px;
@@ -149,6 +154,15 @@
     .newn {
       width: 100%;
           }
+          .box2{
+            position: relative;
+            left:0px;
+            top:-140px;
+            /* top: 0px; */
+          
+            }
+          
+    
     
     
   }

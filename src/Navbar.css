@@ -53,7 +53,7 @@ box-sizing: border-box;
     z-index:10;
    
   }
-  @media screen and (max-width:960px) {
+  @media screen and (max-width:768px) {
     #nav{
         transition: 0.8s all ease;
         /* color:green; */

@@ -2,10 +2,13 @@ import React from 'react';
 import "./Card.css";
 import {AiOutlineExclamationCircle} from "react-icons/ai";
 import BasicTable from '../Table/Table';
+import {Link} from "react-router-dom";
+
 
 
  
-export default function Card() { 
+export default function Card({userData}) { 
+  if(!userData) return;
   const Card1 = () => {
     return (
       <>
@@ -18,8 +21,11 @@ export default function Card() {
               <AiOutlineExclamationCircle className='ms-2 mt-1'/>
               </div>
               <div className='ms-4'>
-                <h4 >#0.00</h4>
+                <h4 >#{userData.currentBalance}</h4>
+                <Link to="/dashboard/portfolio">
                 <button className='btn bg-muted mb-3'>view portfolio</button>
+
+                </Link>
               </div>
           </div>
         </main>
@@ -31,8 +37,11 @@ export default function Card() {
               <AiOutlineExclamationCircle className='ms-2 mt-1'/>
               </div>
               <div className='ms-4'>
-                <h4 >#0.00</h4>
+                <h4 >#{userData.walletBalance}</h4>
+                <Link to="/dashboard/wallet">
                 <button className='btn bg-muted mb-3'>view wallet</button>
+
+                </Link>
               </div>
           </div>
         </main>
@@ -45,7 +54,9 @@ export default function Card() {
               </div>
               <div className='ms-4'>
                 <h4 >0</h4>
+                <Link to="/dashboard/trade">
                 <button className='btn bg-muted mb-3'>Trade</button>
+                </Link>
               </div>
           </div>
         </main>
