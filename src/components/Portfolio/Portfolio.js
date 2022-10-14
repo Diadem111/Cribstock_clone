@@ -26,10 +26,22 @@ export default function Portfolio() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // second section
+  // second modal
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
+
+  // third modal
+  const [visible, setVisible] = useState(false);
+  const handleVisible = () => setVisible(false);
+  const handleHidden = () => setVisible(true);
+
+  // fourth modal
+  const [fact, setFact] = useState(false);
+  const handleFact = () => setFact(false);
+  const handleFact1 = () => setFact(true);
+
+
 
 // for button
 const [click,setClick] = useState(false);
@@ -51,6 +63,51 @@ const handleForClick = () => {
   }
   // setClick(false);
 }
+const handleBuy1 =() => {
+  alert("hello")
+  return (
+    <>
+    <h1>hello word</h1>
+    </>
+  )
+}
+
+// modal second
+              const HandleBuy = () => {
+                
+                    //  setShow(true);
+                          return (
+                                <section className={fact ? `mt-5`:""}>
+                                  {/* <span variant="primary" onClick={handleFact1} className="d-flex ms-5">
+                                    <AiOutlineArrowUp/>
+                                    <button className='wee p-2'>Buy/Sell</button>
+                                  </span> */}
+                                  <Modal show={fact} onHide={handleFact} className="bd-highlight ">
+                                      <Modal.Header closeButton>
+                                          <Modal.Title className="p-3">Do you not want to?</Modal.Title>
+                                      </Modal.Header>
+                                <Modal.Body className="ms-5 bd-highlight dola ">
+                                  <div className="d-flex bd-highlight ">
+                                      <TbRadar size={42} color="green"/>
+                                      <span className="d-flex flex-column ms-3">
+                                          <h2 className="fw-bolder">Buy Stock</h2>
+                                          <p className="text-muted">Browse and invest in your various properties</p>
+                                      </span>
+                                  </div>
+                                </Modal.Body>
+                                <Modal.Body className="ms-5 mb-5 mt-3 bd-highlight dola ">
+                                  <div className="d-flex bd-highlight ">
+                                      <BsCartXFill  size={42} color="green"/>
+                                      <span className="d-flex flex-column ms-3">
+                                          <h2 className="fw-bolder">Sell Stocks</h2>
+                                          <p className="text-muted">Sell your already owned stocks</p>
+                                      </span>
+                                  </div>
+                                </Modal.Body>
+                                    </Modal>
+                                  </section>
+                                  )
+                                }
 
   const TableW = () => {
     return (
@@ -98,10 +155,10 @@ const handleForClick = () => {
                                         <Modal.Title className="p-3">Do you want to?</Modal.Title>
                                     </Modal.Header>
                                <Modal.Body className="ms-5 bd-highlight dola ">
-                                 <div className="d-flex bd-highlight ">
+                                 <div className="d-flex bd-highlight "onClick={()=>{handleClose(); handleFact1();}} >
                                     <TbRadar size={42} color="green"/>
                                     <span className="d-flex flex-column ms-3">
-                                        <h2>Buy Stock</h2>
+                                        <h2 className="fw-bolder" >Buy Stock</h2>
                                         <p className="text-muted">Browse and invest in your various properties</p>
                                     </span>
                                  </div>
@@ -110,12 +167,13 @@ const handleForClick = () => {
                                  <div className="d-flex bd-highlight ">
                                     <BsCartXFill  size={42} color="green"/>
                                     <span className="d-flex flex-column ms-3">
-                                        <h2>Sell Stocks</h2>
+                                        <h2 className="fw-bolder">Sell Stocks</h2>
                                         <p className="text-muted">Sell your already owned stocks</p>
                                     </span>
                                  </div>
                                </Modal.Body>
                                   </Modal>
+                                 <HandleBuy />
                                  </section>
                            
                            {/* second modal start here */}

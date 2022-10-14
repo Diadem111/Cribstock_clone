@@ -52,14 +52,14 @@ export default function Wallet () {
             <div className="list3">
                <div className=" d-flex ms-1 ms-lg-5 dee">
                 <section className="col-12 col-md-6 col-lg-6 mt-5 pt-5 ">
-                    <div className="card bgg">
+                    <div className="card bgg" style={{height:"300px"}}>
                          <main>
                             <span className="d-flex ms-5 mt-4">
-                                <p className="mt-1">Wallet Balance</p>
+                                <p className="mt-1 fw-bold">Wallet Balance</p>
                                <button className="btn odd ms-3 "> <AiOutlineEyeInvisible className=" icu "/>
                                </button>
                             </span>
-                            <h1 className="ms-5 ">#0.00</h1>
+                            <h1 className="ms-5 fw-bold ">#0.00</h1>
                             <div className="d-flex ms-5 odd1 mt-2">
                                   <p className="mt-3 ms-2">Wallet tag: $diadem</p>
                                   <button className="ms-5 ps-5 odd3">
@@ -100,7 +100,7 @@ export default function Wallet () {
                                  {/* modal ends here */}
 
                                  {/* second modal */}
-                                 <section>
+                                 <section className="mt-4">
                                  <span variant="primary" onClick={handleShow1} className="d-flex ms-5">
                                    <MdCompareArrows/>
                                     <p>Transfer</p>
@@ -169,7 +169,7 @@ export default function Wallet () {
                                  </section>
                                  <hr/>
                                  {/* third modal start here */}
-                                 <section>
+                                 <section className="mt-4">
                                  <span variant="primary" onClick={handleShow1} className="d-flex ms-5">
                                    <MdArrowDownward/>
                                     <p>Withdraw</p>

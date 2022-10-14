@@ -78,7 +78,7 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .icu {
-  margin-top:-23px;
+  margin-top:-7px;
   color: #fff;
   /* font-size: 20px; */
 }
@@ -118,6 +118,7 @@
       flex-direction:column;
     }
     .bgg{
+      /* height:400px; */
       width: 28rem;
       border-radius: 15px;
       box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -147,6 +148,7 @@
       height: 100%;
     }
     .dee {
+      /* height: 300px; */
       display: flex;
       flex-direction:column;
     }
