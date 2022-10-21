@@ -11,13 +11,12 @@ import { Link } from 'react-router-dom';
 import {AiOutlineExclamationCircle} from "react-icons/ai";
 // import {AiOutlineEyeInvisible} from "react-icons/ai";
 import { useDispatch,useSelector } from 'react-redux';
-
-
-
+import {AiOutlineArrowLeft} from "react-icons/ai";
+import {PayButton} from "../PayButton";
 import {BsBank}  from "react-icons/bs";
 
 import Button from 'react-bootstrap/Button';
-
+import {paymentReducer} from "../../redux/paymentReducer";
 
 import Modal from "react-bootstrap/Modal";
 
@@ -40,10 +39,76 @@ export default function Wallet () {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [fact, setFact] = useState(false);
+  const handleFact = () => setFact(false);
+  const handleFact1 = () => setFact(true);
+
+
   let currentUser = useSelector((state) => state.users.currentuser);
+
   console.log(currentUser);
   let data = currentUser;
+  
+const dispatch = useDispatch();
+  const [quantity,setQuantity] = useState();
+             
+  let quant;
+  let holder ="";
 
+  
+   const  handleInput = (quant) =>{
+    holder = quant;
+    
+  }
+
+   
+//   fund wallet modal starts here 
+     const FundWallet = () => {
+        return (
+            <>
+            <section className={fact ? `mt-5`:""}>
+                                  {/* <span variant="primary" onClick={handleFact1} className="d-flex ms-5">
+                                    <AiOutlineArrowUp/>
+                                    <button className='wee p-2'>Buy/Sell</button>
+                                  </span> */}
+                                  <Modal show={fact} onHide={handleFact} className="bd-highlight ">
+                                      <Modal.Header closeButton>
+                                          <Modal.Title className="p-3 fw-bold">
+                                          <div className="d-flex flex-row"> 
+                                          <span><AiOutlineArrowLeft className='' onClick={()=>{handleShow();handleFact()}}  /></span>
+                                          <span className='ms-4 fw-bolder'>Fund wallet via card</span>
+                                          </div>
+                                          </Modal.Title>
+                                      </Modal.Header>
+                                <Modal.Body className="ms-5 bd-highlight dola ">
+                                 <main>
+                                  <div>
+                                    <p>
+                                    For your security, your bank may have default transaction
+                                     restrictions on your card. If you are depositing significantly
+                                     higher amounts, please contact your bank to remove or set a new transaction limit.
+                                    </p>
+                                  </div>
+                                  <div className="mb-3 mt-3">
+                                  <label for="lastnameInput" className="form-label fw-bold">
+                                  Amount
+                                </label>
+                                <input type="number" 
+                               className="form-control "
+                               value={quantity}
+                                 onChange={(e)=>handleInput(e.target.value) }/>
+                                  </div>
+                                  < PayButton data={holder} />
+                                  {/* <button className="btn btn-rounded mt-3 text-white fw-bold">Continue</button> */}
+                                 </main>
+                                </Modal.Body>
+                                
+                                    </Modal>
+                                  </section>
+            </>
+        )
+     }
+             
 
     return (
        <section className="App3">
@@ -77,7 +142,7 @@ export default function Wallet () {
                                         <Modal.Title className="p-3">Fund wallet</Modal.Title>
                                     </Modal.Header>
                                <Modal.Body className="ms-5 bd-highlight dola ">
-                                 <div className="d-flex bd-highlight ">
+                                 <div className="d-flex bd-highlight " >
                                     <BsBank size={42}/>
                                     <span className="d-flex flex-column ms-3">
                                         <h2>NGN Mobile Bank Transfer</h2>
@@ -86,7 +151,7 @@ export default function Wallet () {
                                  </div>
                                </Modal.Body>
                                <Modal.Body className="ms-5 mb-5 mt-3 bd-highlight dola ">
-                                 <div className="d-flex bd-highlight ">
+                                 <div className="d-flex bd-highlight " onClick={()=>{handleClose(); handleFact1();}}>
                                     <BsCreditCard2BackFill  size={42}/>
                                     <span className="d-flex flex-column ms-3">
                                         <h2>NGN Debit/Credit card</h2>
@@ -95,6 +160,9 @@ export default function Wallet () {
                                  </div>
                                </Modal.Body>
                                   </Modal>
+
+                                  {/* fund wallet  */}
+                                  <FundWallet/>
                                  </section>
                                  <hr/>
                                  {/* modal ends here */}

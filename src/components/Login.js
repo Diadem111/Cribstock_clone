@@ -40,18 +40,22 @@ export default function Login() {
       if(res.data.status === false) {
         setMyerror(res.data.message);
         console.log(myerror)
-      }else {
-       
+      }
+      else {
         storage = aa.find((val,i)=>val.email == res.data.user.email &&
          val.password == res.data.user.password);
          console.log(storage);
         if(storage){
           setSuccess(res.data.message);
            navigate("/dashboard");
+        }else if(!storage){
+           setMyerror(res.data.message);
+           console.log("Wrong credentials");
         }
        
       }
     }).catch((err) => {
+      // console.log(err);
       setMyerror(err.message);
       console.log(err.message)
 

@@ -2,7 +2,10 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import EstateReducer from "./ProductRedux";
 import userReducer from "./userRedux";
 import ProductRedux from "./ProductRedux";
+import cartReducer from "./cartRedux";
+import paymentReducer from "./paymentReducer";
 import {
+
     persistStore,
     persistReducer,
     FLUSH,
@@ -23,6 +26,8 @@ import {
   const rootReducer = combineReducers({
   Estate: EstateReducer,
     users:userReducer,
+    cart :cartReducer,
+    stripe:paymentReducer
   });
   
   const persistedReducer = persistReducer(persistConfig, rootReducer);
